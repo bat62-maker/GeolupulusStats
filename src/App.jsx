@@ -92,8 +92,16 @@ const App = () => {
     return { years, months, matrix };
   }, [filteredEvents, events]);
 
-  const organizersList = useMemo(() => ['Tots', ...new Set(events.map(e => e.team))].sort(), [events]);
-  const attendeeTeams  = useMemo(() => ['Tots', ...new Set(attendanceRecords.map(a => a.attendee))].sort(), [attendanceRecords]);
+  const organizersList = useMemo(() => {
+    const unique = [...new Set(events.map(e => e.team))].sort((a, b) => a.localeCompare(b));
+    return ['Tots', ...unique];
+  }, [events]);
+
+  const attendeeTeams = useMemo(() => {
+    const unique = [...new Set(attendanceRecords.map(a => a.attendee))].sort((a, b) => a.localeCompare(b));
+    return ['Tots', ...unique];
+  }, [attendanceRecords]);
+
   const yearsList      = useMemo(() => ['Tots', ...new Set(events.map(e => e.year))].sort((a, b) => b - a), [events]);
 
   const barData = useMemo(() => {
@@ -110,6 +118,16 @@ const App = () => {
       }],
     };
   }, [filteredEvents]);
+
+  const handleMilestoneClick = (mNumber) => {
+    const targetEvent = events.find(e => e.order === mNumber);
+    if (targetEvent && targetEvent.year !== 'N/A') {
+      setSelectedYear(targetEvent.year);
+      // Opcional: Resetear otros filtros para ver el hito claramente
+      setSelectedOrganizer('Tots');
+      setSelectedAttendee('Tots');
+    }
+  };
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-200 font-sans p-4 md:p-8">
@@ -134,8 +152,8 @@ const App = () => {
 
           <div className="flex -space-x-4">
             {visibleMilestones.map(m => (
-              <div key={m}>
-                <MilestoneMedal number={m} />
+               <div key={m} className="animate-in zoom-in duration-500">
+                <MilestoneMedal number={m} onClick={() => handleMilestoneClick(m)} />
               </div>
             ))}
           </div>
@@ -146,17 +164,21 @@ const App = () => {
             icon={<Calendar className="text-lime-500" />}
             label="Any" value={selectedYear}
             options={yearsList} onChange={setSelectedYear}
+            onClear={() => setSelectedYear('Tots')}
           />
           <FilterSelect
             icon={<Trophy className="text-amber-500" />}
             label="Organitzador" value={selectedOrganizer}
             options={organizersList} onChange={setSelectedOrganizer}
+            onClear={() => setSelectedOrganizer('Tots')}
           />
           <FilterSelect
             icon={<UserPlus className="text-blue-500" />}
             label="Assistència de" value={selectedAttendee}
             options={attendeeTeams} onChange={setSelectedAttendee}
+            onClear={() => setSelectedAttendee('Tots')} 
           />
+
         </div>
       </header>
 

@@ -1,13 +1,15 @@
 import { MEDAL_CONFIGS } from '../utils/milestones';
 import MyTooltip from './MyTooltip';
 
-const MilestoneMedal = ({ number }) => {
+const MilestoneMedal = ({ number, onClick }) => {
   const config = MEDAL_CONFIGS[number] || MEDAL_CONFIGS[150];
 
   return (
     <MyTooltip text={`Edició Històrica ${number} — ${config.label}`} position="bottom">
     <div
+      onClick={onClick}
       className="relative flex flex-col items-center justify-center animate-pulse-slow group cursor-help scale-75 sm:scale-90"
+      title={`Veure l'any de l'Edició Històrica ${number}`}
     >
       <svg
         width="60" height="80" viewBox="0 0 100 120"
