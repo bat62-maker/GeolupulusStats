@@ -22,7 +22,7 @@ const ExtremeEventCard = ({ event, label }) => {
           </div>
           <div>
             <p className="text-orange-500 text-xs font-black uppercase tracking-[0.2em] mb-1">{label}</p>
-            <h3 className="text-2xl md:text-3xl font-black text-white italic tracking-tighter leading-tight uppercase truncate max-w-lg">
+            <h3 className="text-2xl md:text-3xl font-black text-white italic tracking-tighter leading-tight uppercase max-w-lg">
               {event.name}
             </h3>
             <div className="flex items-center gap-4 mt-2">
