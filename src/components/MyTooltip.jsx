@@ -3,16 +3,16 @@
  * Apareix a sobre de l'element, centrat, amb animació.
  *
  * Ús:
- *   <Tooltip text="El meu tooltip">
+ *   <MyTooltip text="El meu tooltip">
  *     <div>hover me</div>
- *   </Tooltip>
+ *   </MyTooltip>
  *
  * Props:
  *   text     — contingut del tooltip (string o JSX)
  *   position — 'top' | 'bottom' | 'left' | 'right'  (default: 'top')
  *   className — classes extra per al wrapper
  */
-const Tooltip = ({ text, children, position = 'top', className = '' }) => {
+const MyTooltip = ({ text, children, position = 'top', className = '' }) => {
   if (!text) return children;
 
   const posClasses = {
@@ -34,7 +34,7 @@ const Tooltip = ({ text, children, position = 'top', className = '' }) => {
       {children}
       <div
         className={`
-          pointer-events-none absolute z-50 whitespace-nowrap
+          pointer-events-none absolute z-50 whitespace-normal w-max max-w-xs 
           ${posClasses[position]}
           opacity-0 scale-95 group-hover/tooltip:opacity-100 group-hover/tooltip:scale-100
           transition-all duration-150 ease-out
@@ -51,4 +51,4 @@ const Tooltip = ({ text, children, position = 'top', className = '' }) => {
   );
 };
 
-export default Tooltip;
+export default MyTooltip;

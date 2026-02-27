@@ -1,11 +1,11 @@
 import { MEDAL_CONFIGS } from '../utils/milestones';
-import Tooltip from './Tooltip';
+import MyTooltip from './MyTooltip';
 
 const MilestoneMedal = ({ number }) => {
   const config = MEDAL_CONFIGS[number] || MEDAL_CONFIGS[150];
 
   return (
-    <Tooltip text={`Edició Històrica ${number} — ${config.label}`} position="bottom">
+    <MyTooltip text={`Edició Històrica ${number} — ${config.label}`} position="bottom">
     <div
       className="relative flex flex-col items-center justify-center animate-pulse-slow group cursor-help scale-75 sm:scale-90"
     >
@@ -27,7 +27,7 @@ const MilestoneMedal = ({ number }) => {
         </text>
       </svg>
     </div>
-    </Tooltip>
+    </MyTooltip>
   );
 };
 

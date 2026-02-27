@@ -34,7 +34,7 @@ import { getMilestoneStyle } from './utils/milestones';
 import StatCard from './components/StatCard';
 import FilterSelect from './components/FilterSelect';
 import MilestoneMedal from './components/MilestoneMedal';
-import Tooltip from './components/Tooltip';
+import MyTooltip from './components/MyTooltip';
 
 ChartJS.register(
   CategoryScale, LinearScale, BarElement,
@@ -220,11 +220,11 @@ const App = () => {
                             ? `${year} · ${heatmapData.months[mIdx]} — ${val} assistents`
                             : null;
                           return (
-                            <Tooltip key={mIdx} text={tooltipText} position="top">
+                            <MyTooltip key={mIdx} text={tooltipText} position="top">
                               <div className={`flex-1 h-10 rounded-md transition-all flex items-center justify-center cursor-default ${intensity}`}>
                                 {val > 0 && <span className="text-[10px] font-black text-white/30">{val}</span>}
                               </div>
-                            </Tooltip>
+                            </MyTooltip>
                           );
                         })}
                       </div>
