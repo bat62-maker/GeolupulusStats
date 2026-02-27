@@ -34,6 +34,7 @@ import { getMilestoneStyle } from './utils/milestones';
 import StatCard from './components/StatCard';
 import FilterSelect from './components/FilterSelect';
 import MilestoneMedal from './components/MilestoneMedal';
+import Tooltip from './components/Tooltip';
 
 ChartJS.register(
   CategoryScale, LinearScale, BarElement,
@@ -215,14 +216,15 @@ const App = () => {
                             val < 10   ? 'bg-lime-900/30' :
                             val < 20   ? 'bg-lime-700/50' :
                             val < 35   ? 'bg-lime-500/70' : 'bg-lime-400';
+                          const tooltipText = val > 0
+                            ? `${year} · ${heatmapData.months[mIdx]} — ${val} assistents`
+                            : null;
                           return (
-                            <div
-                              key={mIdx}
-                              title={val > 0 ? `${year} ${heatmapData.months[mIdx]}: ${val} assistents` : undefined}
-                              className={`flex-1 h-10 rounded-md transition-all flex items-center justify-center ${intensity}`}
-                            >
-                              {val > 0 && <span className="text-[10px] font-black text-white/30">{val}</span>}
-                            </div>
+                            <Tooltip key={mIdx} text={tooltipText} position="top">
+                              <div className={`flex-1 h-10 rounded-md transition-all flex items-center justify-center cursor-default ${intensity}`}>
+                                {val > 0 && <span className="text-[10px] font-black text-white/30">{val}</span>}
+                              </div>
+                            </Tooltip>
                           );
                         })}
                       </div>
@@ -245,7 +247,25 @@ const App = () => {
                   responsive: true,
                   maintainAspectRatio: false,
                   indexAxis: 'y',
-                  plugins: { legend: { display: false } },
+                  plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                      backgroundColor: '#1e293b',
+                      borderColor: '#334155',
+                      borderWidth: 1,
+                      titleColor: '#f1f5f9',
+                      bodyColor: '#84cc16',
+                      titleFont: { size: 13, weight: 'bold' },
+                      bodyFont: { size: 16, weight: 'bold' },
+                      padding: 14,
+                      cornerRadius: 12,
+                      displayColors: false,
+                      callbacks: {
+                        title: (items) => items[0]?.label?.replace('...', '') || '',
+                        label: (item) => `${item.raw} assistents`,
+                      },
+                    },
+                  },
                   scales: {
                     y: { grid: { display: false }, ticks: { color: '#64748b', font: { size: 10, weight: 'bold' } } },
                     x: { grid: { color: '#1e293b' }, ticks: { color: '#475569', font: { size: 10 } } },
