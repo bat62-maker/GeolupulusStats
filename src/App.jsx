@@ -34,7 +34,6 @@ import { getMilestoneStyle } from './utils/milestones';
 import StatCard from './components/StatCard';
 import FilterSelect from './components/FilterSelect';
 import MilestoneMedal from './components/MilestoneMedal';
-import MyTooltip from './components/MyTooltip';
 
 ChartJS.register(
   CategoryScale, LinearScale, BarElement,
@@ -98,7 +97,7 @@ const App = () => {
   const barData = useMemo(() => {
     const sorted = [...filteredEvents].sort((a, b) => b.attendees - a.attendees).slice(0, 20);
     return {
-      labels: sorted.map(e => (e.name?.substring(0, 15) || '') + '...'),
+      labels: sorted.map(e => (e.name?.substring(0, 50) || '') + '...'),
       datasets: [{
         label: 'Assistents',
         data: sorted.map(e => e.attendees),
@@ -216,15 +215,14 @@ const App = () => {
                             val < 10   ? 'bg-lime-900/30' :
                             val < 20   ? 'bg-lime-700/50' :
                             val < 35   ? 'bg-lime-500/70' : 'bg-lime-400';
-                          const tooltipText = val > 0
-                            ? `${year} · ${heatmapData.months[mIdx]} — ${val} assistents`
-                            : null;
                           return (
-                            <MyTooltip key={mIdx} text={tooltipText} position="top">
-                              <div className={`flex-1 h-10 rounded-md transition-all flex items-center justify-center cursor-default ${intensity}`}>
-                                {val > 0 && <span className="text-[10px] font-black text-white/30">{val}</span>}
-                              </div>
-                            </MyTooltip>
+                            <div
+                              key={mIdx}
+                              title={val > 0 ? `${year} ${heatmapData.months[mIdx]}: ${val} assistents` : undefined}
+                              className={`flex-1 h-10 rounded-md transition-all flex items-center justify-center ${intensity}`}
+                            >
+                              {val > 0 && <span className="text-[10px] font-black text-white/30">{val}</span>}
+                            </div>
                           );
                         })}
                       </div>
