@@ -210,8 +210,18 @@ const App = () => {
                       <div className="w-20 shrink-0 text-xs font-black text-slate-500 group-hover/row:text-lime-500 transition-colors">{year}</div>
                       <div className="flex flex-1 gap-1">
                         {heatmapData.matrix[yIdx].map((val, mIdx) => {
-                          const intensity =
-                            val === 0  ? 'bg-slate-950 border border-slate-900/50' :
+                          const now = new Date();
+                          const cellDate = new Date(parseInt(year), mIdx, 1);
+                          const limitDate = new Date(2012, 2, 1); // Marzo 2012
+                          
+                         // Condición: No sale color antes de Marzo 2012, después de hoy, o si no coincide con el filtro de año
+                          const isYearFiltered = selectedYear !== 'Tots' && year !== selectedYear;
+                          const outOfBounds = cellDate < limitDate || cellDate > now || isYearFiltered;
+
+                          
+                          const intensity = 
+                            outOfBounds ? 'bg-slate-950 border border-slate-900/50' : 
+                            val === 0  ? 'bg-red-300 border border-slate-900/50' :
                             val < 10   ? 'bg-lime-900/30' :
                             val < 20   ? 'bg-lime-700/50' :
                             val < 35   ? 'bg-lime-500/70' : 'bg-lime-400';
