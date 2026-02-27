@@ -14,6 +14,7 @@ import {
   Flame,
   Activity,
   MapPin,
+  ScrollText
 } from 'lucide-react';
 import {
   Chart as ChartJS,
@@ -32,6 +33,7 @@ import { Bar } from 'react-chartjs-2';
 import { useEventData } from './hooks/useEventData';
 import { getMilestoneStyle } from './utils/milestones';
 import StatCard from './components/StatCard';
+import ExtremeEventCard from './components/ExtremeEventCard';
 import FilterSelect from './components/FilterSelect';
 import MilestoneMedal from './components/MilestoneMedal';
 
@@ -176,19 +178,17 @@ const App = () => {
         <main className="max-w-7xl mx-auto space-y-8">
 
           {/* STAT CARDS */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <StatCard icon={<Users />}     label="Assistència Total"   value={stats.totalAttendees} color="text-blue-400" />
             <StatCard icon={<Layers />}    label="Esdeveniments"        value={stats.totalEvents}    color="text-lime-400" />
-            <StatCard icon={<TrendingUp />}label="Mitjana Logs"         value={stats.avgAttendees}   color="text-emerald-400" />
-            <StatCard icon={<Trophy />}    label="Organitzadors"        value={stats.uniqueTeams}    color="text-amber-400" />
-            <StatCard
-              icon={<Flame />}
-              label="Esdeveniment Rècord"
-              value={stats.maxEvent?.attendees || 0}
-              subValue={stats.maxEvent?.name?.substring(0, 15) + '...'}
-              color="text-orange-500"
-            />
+            <StatCard icon={<ScrollText />}label="Mitjana Logs"         value={stats.avgAttendees}   color="text-emerald-400" />
+            <StatCard icon={<Trophy />}    label="Organitzadors"        value={stats.uniqueTeams}    color="text-amber-400" />          
           </div>
+          {/* Tarjeta de Extremo: Evento Récord Dinámico */}
+          <ExtremeEventCard 
+            event={stats.maxEvent}
+            label="Esdeveniment Rècord" 
+          />
 
           {/* HEATMAP */}
           <div className="bg-slate-900/50 border border-slate-800 rounded-3xl p-8 backdrop-blur-sm shadow-xl">
@@ -330,7 +330,7 @@ const App = () => {
                         <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-2">
                           <span className="text-[10px] font-black text-blue-500 uppercase tracking-widest flex items-center gap-2">
                             <Trophy size={10} /> {event.team}
-                          </span>
+                          </span> 
                           <span className="text-[10px] text-slate-500 flex items-center gap-2 font-bold uppercase">
                             <MapPin size={10} /> {event.location}
                           </span>
