@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import {
   Compass,
   Users,
@@ -391,6 +392,7 @@ const App = () => {
 
         </main>
       )}
+      <Analytics />
     </div>
   );
 };
