@@ -107,7 +107,7 @@ const App = () => {
   const barData = useMemo(() => {
     const sorted = [...filteredEvents].sort((a, b) => b.attendees - a.attendees).slice(0, 20);
     return {
-      labels: sorted.map(e => (e.name?.substring(0, 50) || '') + '...'),
+      labels: sorted.map(e => e.name || ''),
       datasets: [{
         label: 'Assistents',
         data: sorted.map(e => e.attendees),
@@ -272,7 +272,10 @@ const App = () => {
                 <BarChart3 className="text-lime-500 w-5 h-5" />
                 Rànquing d'Assistència (Top 20)
               </h2>
-              <div className="h-[400px]">
+              <div
+                className="h-[var(--bar-h)] sm:h-[400px]"
+                style={{ '--bar-h': `${Math.max(240, barData.labels.length * 28 + 40)}px` }}
+              >
                 <Bar data={barData} options={{
                   responsive: true,
                   maintainAspectRatio: false,
@@ -291,13 +294,24 @@ const App = () => {
                       cornerRadius: 12,
                       displayColors: false,
                       callbacks: {
-                        title: (items) => items[0]?.label?.replace('...', '') || '',
+                        title: (items) => items[0]?.label || '',
                         label: (item) => `${item.raw} assistents`,
                       },
                     },
                   },
                   scales: {
-                    y: { grid: { display: false }, ticks: { color: '#64748b', font: { size: 10, weight: 'bold' } } },
+                    y: {
+                      grid: { display: false },
+                      ticks: {
+                        color: '#64748b',
+                        font: { size: 10, weight: 'bold' },
+                        callback(value) {
+                          const label = this.getLabelForValue(value);
+                          const max = this.chart.width < 500 ? 18 : 50;
+                          return label.length > max ? label.slice(0, max) + '…' : label;
+                        },
+                      },
+                    },
                     x: { grid: { color: '#1e293b' }, ticks: { color: '#475569', font: { size: 10 } } },
                   },
                 }} />
