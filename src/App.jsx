@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import {
   Compass,
   Users,
@@ -59,6 +59,14 @@ const App = () => {
       return matchOrganizer && matchAttendee && matchYear;
     });
   }, [events, attendanceRecords, selectedOrganizer, selectedAttendee, selectedYear]);
+
+  const [visibleCount, setVisibleCount] = useState(20);
+  useEffect(() => { setVisibleCount(20); }, [selectedOrganizer, selectedAttendee, selectedYear]);
+
+  const sortedEvents = useMemo(
+    () => [...filteredEvents].sort((a, b) => b.order - a.order),
+    [filteredEvents]
+  );
 
   const visibleMilestones = useMemo(() => {
     return [150, 100, 50].filter(m => filteredEvents.some(e => e.order === m));
@@ -348,8 +356,8 @@ const App = () => {
                 {filteredEvents.length} Resultats
               </div>
             </div>
-            <div className="max-h-[600px] overflow-y-auto custom-scrollbar">
-              {[...filteredEvents].sort((a, b) => b.order - a.order).map(event => {
+            <div className="md:max-h-[600px] md:overflow-y-auto custom-scrollbar">
+              {sortedEvents.slice(0, visibleCount).map(event => {
                 const milestone = getMilestoneStyle(event.order);
                 return (
                   <a
@@ -401,6 +409,14 @@ const App = () => {
                 );
               })}
             </div>
+            {sortedEvents.length > visibleCount && (
+              <button
+                onClick={() => setVisibleCount(c => c + 20)}
+                className="w-full py-4 text-xs font-black uppercase tracking-widest text-lime-500 border-t border-slate-800/50 hover:bg-white/[0.03] transition-colors"
+              >
+                Mostrar més ({sortedEvents.length - visibleCount})
+              </button>
+            )}
           </div>
 
         </main>
