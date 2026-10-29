@@ -221,7 +221,7 @@ const App = () => {
           />
 
           {/* HEATMAP */}
-          <div className="bg-slate-900/50 border border-slate-800 rounded-3xl p-8 backdrop-blur-sm shadow-xl">
+          <div className="bg-slate-900/50 border border-slate-800 rounded-3xl p-4 sm:p-8 backdrop-blur-sm shadow-xl">
             <h2 className="text-xl font-bold flex items-center gap-2 text-white mb-8">
               <Activity className="text-lime-500 w-5 h-5" />
               Mapa d'Activitat Històrica
@@ -274,8 +274,8 @@ const App = () => {
           </div>
 
           {/* CHARTS + ORGANIZERS */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2 bg-slate-900/50 border border-slate-800 rounded-3xl p-8 backdrop-blur-sm shadow-lg">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-8">
+            <div className="lg:col-span-2 bg-slate-900/50 border border-slate-800 rounded-3xl p-4 sm:p-8 backdrop-blur-sm shadow-lg">
               <h2 className="text-xl font-bold mb-8 flex items-center gap-2">
                 <BarChart3 className="text-lime-500 w-5 h-5" />
                 Rànquing d'Assistència (Top 20)
@@ -326,7 +326,7 @@ const App = () => {
               </div>
             </div>
 
-            <div className="bg-slate-900/50 border border-slate-800 rounded-3xl p-8 backdrop-blur-sm flex flex-col shadow-lg">
+            <div className="bg-slate-900/50 border border-slate-800 rounded-3xl p-4 sm:p-8 backdrop-blur-sm flex flex-col shadow-lg">
               <h2 className="text-xl font-bold mb-8 flex items-center gap-2 text-white">
                 <Award className="text-blue-500 w-5 h-5" />
                 Dades per Organitzador
@@ -349,8 +349,8 @@ const App = () => {
           </div>
 
           {/* EVENTS LIST */}
-          <div className="bg-slate-900/80 border border-slate-800 rounded-[2.5rem] overflow-hidden shadow-2xl">
-            <div className="p-8 border-b border-slate-800/50 bg-slate-900/50 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <div className="bg-slate-900/80 border border-slate-800 rounded-3xl sm:rounded-[2.5rem] overflow-hidden shadow-2xl">
+            <div className="p-4 sm:p-8 border-b border-slate-800/50 bg-slate-900/50 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <h2 className="text-2xl font-black italic uppercase tracking-tighter text-white">Esdeveniments filtrats</h2>
               <div className="px-5 py-2 bg-lime-500/10 border border-lime-500/20 rounded-full text-[11px] font-black text-lime-500 uppercase tracking-[0.15em]">
                 {filteredEvents.length} Resultats
