@@ -142,13 +142,13 @@ const App = () => {
 
       {/* HEADER */}
       <header className="max-w-7xl mx-auto flex flex-col xl:flex-row justify-between items-start xl:items-center mb-12 gap-6">
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center gap-4">
           <div>
             <div className="flex items-center gap-3 mb-2">
               <div className="p-2 bg-lime-500 rounded-lg shadow-lg shadow-lime-500/20">
                 <Compass className="text-slate-950 w-6 h-6" />
               </div>
-              <h1 className="text-4xl font-black tracking-tighter uppercase italic text-white">
+              <h1 className="text-3xl sm:text-4xl font-black tracking-tighter uppercase italic text-white">
                 Geo<span className="text-lime-500">Lúpulus</span>
               </h1>
             </div>
