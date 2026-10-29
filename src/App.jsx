@@ -200,7 +200,7 @@ const App = () => {
         <main className="max-w-7xl mx-auto space-y-8">
 
           {/* STAT CARDS */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             <StatCard icon={<Users />}     label="Assistència Total"   value={stats.totalAttendees} color="text-blue-400" />
             <StatCard icon={<Layers />}    label="Esdeveniments"        value={stats.totalEvents}    color="text-lime-400" />
             <StatCard icon={<ScrollText />}label="Mitjana Logs"         value={stats.avgAttendees}   color="text-emerald-400" />
