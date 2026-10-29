@@ -219,9 +219,9 @@ const App = () => {
               Mapa d'Activitat Històrica
             </h2>
             <div className="overflow-x-auto custom-scrollbar-h">
-              <div className="min-w-[800px] pb-4">
+              <div className="min-w-[560px] sm:min-w-[800px] pb-4">
                 <div className="flex mb-4">
-                  <div className="w-20 shrink-0"></div>
+                  <div className="w-12 sm:w-20 shrink-0"></div>
                   {heatmapData.months.map(m => (
                     <div key={m} className="flex-1 text-center text-[10px] font-black text-slate-600 uppercase tracking-tighter">{m}</div>
                   ))}
@@ -229,7 +229,7 @@ const App = () => {
                 <div className="space-y-1">
                   {heatmapData.years.map((year, yIdx) => (
                     <div key={year} className="flex items-center group/row">
-                      <div className="w-20 shrink-0 text-xs font-black text-slate-500 group-hover/row:text-lime-500 transition-colors">{year}</div>
+                      <div className="w-12 sm:w-20 shrink-0 sticky left-0 z-10 bg-slate-900 text-xs font-black text-slate-500 group-hover/row:text-lime-500 transition-colors">{year}</div>
                       <div className="flex flex-1 gap-1">
                         {heatmapData.matrix[yIdx].map((val, mIdx) => {
                           const now = new Date();
@@ -253,7 +253,7 @@ const App = () => {
                               title={val > 0 ? `${year} ${heatmapData.months[mIdx]}: ${val} assistents` : undefined}
                               className={`flex-1 h-10 rounded-md transition-all flex items-center justify-center ${intensity}`}
                             >
-                              {val > 0 && <span className="text-[10px] font-black text-white/30">{val}</span>}
+                              {val > 0 && <span className={`text-[10px] font-black ${val >= 35 ? 'text-slate-900/70' : 'text-white/60'}`}>{val}</span>}
                             </div>
                           );
                         })}
