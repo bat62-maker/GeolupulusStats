@@ -366,14 +366,14 @@ const App = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`Veure ${event.name} a coord.info`}
-                    className={`p-6 hover:bg-white/[0.03] transition-all border-b border-slate-800/30 group flex flex-col md:flex-row md:items-center justify-between gap-6 no-underline ${milestone ? milestone.bg : ''}`}
+                    className={`p-4 sm:p-6 hover:bg-white/[0.03] transition-all border-b border-slate-800/30 group flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-6 no-underline ${milestone ? milestone.bg : ''}`}
                   >
-                    <div className="flex items-center gap-6">
-                      <span className={`text-2xl font-black shrink-0 ${milestone ? milestone.text : 'text-slate-800 group-hover:text-lime-500/20'}`}>
+                    <div className="flex items-center gap-3 sm:gap-6">
+                      <span className={`text-xl sm:text-2xl font-black shrink-0 ${milestone ? milestone.text : 'text-slate-800 group-hover:text-lime-500/20'}`}>
                         {String(event.order).padStart(3, '0')}
                       </span>
                       <div>
-                        <h4 className="font-bold text-slate-100 group-hover:text-lime-400 transition-colors text-xl leading-tight flex items-center gap-3">
+                        <h4 className="font-bold text-slate-100 group-hover:text-lime-400 transition-colors text-lg sm:text-xl leading-tight flex items-center gap-3">
                           {event.name}
                           {milestone && (
                             <span className={`${milestone.text.replace('text-', 'bg-')}/20 ${milestone.text} text-[9px] font-black px-2 py-0.5 rounded-sm uppercase tracking-tighter border border-current opacity-80`}>
@@ -381,20 +381,20 @@ const App = () => {
                             </span>
                           )}
                         </h4>
-                        <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-2">
-                          <span className="text-[10px] font-black text-blue-500 uppercase tracking-widest flex items-center gap-2">
+                        <div className="flex flex-wrap items-center gap-x-4 sm:gap-x-6 gap-y-1.5 mt-2">
+                          <span className="text-xs sm:text-[10px] font-black text-blue-500 uppercase tracking-widest flex items-center gap-2">
                             <Trophy size={10} /> {event.team}
                           </span> 
-                          <span className="text-[10px] text-slate-500 flex items-center gap-2 font-bold uppercase">
+                          <span className="text-xs sm:text-[10px] text-slate-500 flex items-center gap-2 font-bold uppercase">
                             <MapPin size={10} /> {event.location}
                           </span>
-                          <span className="text-[10px] text-slate-400 flex items-center gap-2 font-mono">
+                          <span className="text-xs sm:text-[10px] text-slate-400 flex items-center gap-2 font-mono">
                             <Calendar size={10} /> {event.date}
                           </span>
                         </div>
                       </div>
                     </div>
-                    <div className="flex items-center justify-between md:justify-end gap-10">
+                    <div className="flex items-center justify-between md:justify-end gap-6 sm:gap-10">
                       <div className="text-right">
                         <div className="text-3xl font-black text-lime-500 leading-none group-hover:scale-110 transition-transform origin-right">
                           {event.attendees}
